@@ -29,5 +29,7 @@ jobs:
     needs:
       - config
     steps:
+      - name: Print java config
+        run: echo ${{ needs.config.outputs.java_config }}
       - name: Print version
         run: echo ${{ fromJSON(needs.config.outputs.java_config_json).version }}
