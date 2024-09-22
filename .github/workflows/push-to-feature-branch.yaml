@@ -13,6 +13,7 @@ jobs:
       - id: config
         run: |
           echo "java=$(jq -c '.' '.github/java-config.json')" >> "$GITHUB_OUTPUT"
+      - run: echo ${{ steps.config.outputs.java }}
   evaluate:
     name: Evaluate configuration
     runs-on: ubuntu-latest
