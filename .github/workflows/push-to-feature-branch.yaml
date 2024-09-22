@@ -10,6 +10,7 @@ jobs:
     outputs:
       java_config: ${{ steps.config.outputs.java_config }}
       java_config_json: ${{ toJSON(steps.config.outputs.java_config) }}
+      java_version: ${{ fromJSON(steps.config.outputs.java_config).version }}
     steps:
       - name: Checkout the code
         uses: actions/checkout@v4
@@ -31,5 +32,5 @@ jobs:
     steps:
       - name: Print java config
         run: echo ${{ needs.config.outputs.java_config }}
-      - name: Print version
-        run: echo ${{ fromJSON(needs.config.outputs.java_config_json).version }}
+      - name: Print java version
+        run: echo ${{ needs.config.outputs.java_version }}
