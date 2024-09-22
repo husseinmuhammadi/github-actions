@@ -8,7 +8,8 @@ jobs:
     name: Prepare configuration
     runs-on: ubuntu-latest
     outputs:
-      java: ${{ steps.config.outputs.java }}
+      java_config: ${{ steps.config.outputs.java_config }}
+      java_config_json: ${{ toJSON(steps.config.outputs.java_config) }}
     steps:
       - name: Checkout the code
         uses: actions/checkout@v4
@@ -28,5 +29,5 @@ jobs:
     needs:
       - config
     steps:
-      - name: Print config
-        run: echo ${{ needs.config.outputs.java }}
+      - name: Print version
+        run: echo ${{ fromJSON(needs.config.outputs.java_config_json).version }}
