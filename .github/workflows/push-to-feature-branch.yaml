@@ -12,15 +12,14 @@ jobs:
     steps:
       - name: Checkout the code
         uses: actions/checkout@v4
-      - name: preparation
-        run: ls -la
       - id: config
         run: |          
           echo "title='GitHub Actions'" >> "$GITHUB_OUTPUT"
-          echo "java=$(jq -c '.' '.github/java-config.json')" >> "$GITHUB_OUTPUT"
-      - run: |
-          echo ${{ steps.config.outputs.title }}
-          echo ${{ steps.config.outputs.java }}
+          echo "java_config=$(jq -c '.' '.github/java-config.json')" >> "$GITHUB_OUTPUT"
+      - name: Print title
+        run: echo ${{ steps.config.outputs.title }}
+      - name: Print java config
+        run: echo ${{ steps.config.outputs.java_config }}
   evaluate:
     name: Evaluate configuration
     runs-on: ubuntu-latest
