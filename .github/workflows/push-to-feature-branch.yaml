@@ -10,8 +10,10 @@ jobs:
     outputs:
       java: ${{ steps.config.outputs.java }}
     steps:
+      - name: preparation
+        run: ls -la
       - id: config
-        run: |
+        run: |          
           echo "title='GitHub Actions'" >> "$GITHUB_OUTPUT"
           echo "java=$(jq -c '.' '.github/java-config.json')" >> "$GITHUB_OUTPUT"
       - run: |
