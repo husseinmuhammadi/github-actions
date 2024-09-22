@@ -10,6 +10,8 @@ jobs:
     outputs:
       java: ${{ steps.config.outputs.java }}
     steps:
+      - name: Checkout the code
+        uses: actions/checkout@v4
       - name: preparation
         run: ls -la
       - id: config
