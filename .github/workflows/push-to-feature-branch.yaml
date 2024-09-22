@@ -1,0 +1,23 @@
+name: Push to feature branch
+on:
+  push:
+    branches:
+      - 'feature/*'
+jobs:
+  config:
+    name: Prepare configuration
+    runs-on: ubuntu-latest
+    outputs:
+      java: ${{ steps.config.outputs.java }}
+    steps:
+      - id: config
+        run: |
+          echo "java=$(jq -c '.' '.github/java-config.json')" >> "$GITHUB_OUTPUT"
+  evaluate:
+    name: Evaluate configuration
+    runs-on: ubuntu-latest
+    needs:
+      - config
+    steps:
+      - name: Print config
+        run: echo ${{ needs.config.outputs.java }}
