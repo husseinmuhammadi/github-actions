@@ -12,6 +12,7 @@ jobs:
       java_version: ${{ fromJSON(steps.config.outputs.java_config).java.version }}
       maven_config: ${{ steps.config.outputs.maven_config }}
       git_config: ${{ steps.config.outputs.git_config }}
+      github_config: ${{ steps.config.outputs.github_config }}
     steps:
       - name: Checkout the code
         uses: actions/checkout@v4
@@ -26,6 +27,7 @@ jobs:
           echo "java_config=$(jq -c '.' '.github/java-config.json')" >> "$GITHUB_OUTPUT"
           echo "maven_config=$(jq -c '.maven_config' '.github/build-config.json')" >> "$GITHUB_OUTPUT"
           echo "git_config=$(jq -c '.git_config' '.github/build-config.json')" >> "$GITHUB_OUTPUT"
+          echo "github_config=$(jq -c '.' '.github/github-config.json')" >> "$GITHUB_OUTPUT"
       - name: Print title
         run: echo ${{ steps.config.outputs.title }}
       - name: Print java config
@@ -52,3 +54,7 @@ jobs:
         run: echo ${{ needs.config.outputs.git_config }}
       - name: Print git version
         run: echo ${{ fromJSON(needs.config.outputs.git_config).version }}
+      - name: Print github config
+        run: echo ${{ needs.config.outputs.github_config }}
+      - name: Print github runner
+        run: echo ${{ fromJSON(needs.config.outputs.github_config).runner }}
