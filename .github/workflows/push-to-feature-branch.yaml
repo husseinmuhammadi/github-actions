@@ -13,6 +13,7 @@ jobs:
       maven_config: ${{ steps.config.outputs.maven_config }}
       git_config: ${{ steps.config.outputs.git_config }}
       github_config: ${{ steps.config.outputs.github_config }}
+      file_not_exists_config: ${{ steps.config.outputs.file_not_exists_config }}
     steps:
       - name: Checkout the code
         uses: actions/checkout@v4
@@ -28,6 +29,7 @@ jobs:
           echo "maven_config=$(jq -c '.maven_config' '.github/build-config.json')" >> "$GITHUB_OUTPUT"
           echo "git_config=$(jq -c '.git_config' '.github/build-config.json')" >> "$GITHUB_OUTPUT"
           echo "github_config=$(jq -c '.' '.github/github-config.json')" >> "$GITHUB_OUTPUT"
+          echo "file_not_exists_config=$(jq -c '.' '.github/file-not-exists-config.json')" >> "$GITHUB_OUTPUT"
       - name: Print title
         run: echo ${{ steps.config.outputs.title }}
       - name: Print java config
@@ -58,3 +60,7 @@ jobs:
         run: echo ${{ needs.config.outputs.github_config }}
       - name: Print github runner
         run: echo ${{ fromJSON(needs.config.outputs.github_config).runner }}
+      - name: Print file_not_exists config
+        run: echo ${{ needs.config.outputs.file_not_exists_config }}
+      - name: Print file_not_exists value
+        run: echo ${{ fromJSON(needs.config.outputs.file_not_exists_config).value }}
