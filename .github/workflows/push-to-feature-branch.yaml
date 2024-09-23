@@ -11,7 +11,7 @@ jobs:
       java_config: ${{ steps.config.outputs.java_config }}
       java_config_json: ${{ toJSON(steps.config.outputs.java_config) }}
       java_version: ${{ fromJSON(steps.config.outputs.java_config).java.version }}
-      maven_config: ${{ toJSON(steps.config.outputs.maven_config) }}
+      maven_config: ${{ steps.config.outputs.maven_config }}
     steps:
       - name: Checkout the code
         uses: actions/checkout@v4
