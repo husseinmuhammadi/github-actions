@@ -15,6 +15,9 @@ jobs:
     steps:
       - name: Checkout the code
         uses: actions/checkout@v4
+      - name: prepare
+        run: |
+          jq -c '.' '.github/build-config.json'
       - id: config
         run: |          
           echo "title='GitHub Actions'" >> "$GITHUB_OUTPUT"
