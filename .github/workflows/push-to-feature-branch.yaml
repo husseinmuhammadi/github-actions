@@ -12,8 +12,6 @@ jobs:
       java_config_json: ${{ toJSON(steps.config.outputs.java_config) }}
       java_version: ${{ fromJSON(steps.config.outputs.java_config).java.version }}
       maven-config: ${{ steps.config.outputs.maven-config }}
-#      maven_config: ${{ fromJSON(steps.config.outputs.maven_config).maven }}
-#      maven_version: ${{ fromJSON(steps.config.outputs.maven_config).maven.version }}
     steps:
       - name: Checkout the code
         uses: actions/checkout@v4
@@ -21,7 +19,6 @@ jobs:
         run: |          
           echo "title='GitHub Actions'" >> "$GITHUB_OUTPUT"
           echo "java_config=$(jq -c '.' '.github/java-config.json')" >> "$GITHUB_OUTPUT"
-#          echo "maven-config=$(jq -c '.maven-config' '.github/maven-config.json')" >> "$GITHUB_OUTPUT"
           echo "maven-config='{}'" >> "$GITHUB_OUTPUT"
       - name: Print title
         run: echo ${{ steps.config.outputs.title }}
