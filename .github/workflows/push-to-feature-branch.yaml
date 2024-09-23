@@ -11,7 +11,8 @@ jobs:
       java_config: ${{ steps.config.outputs.java_config }}
       java_config_json: ${{ toJSON(steps.config.outputs.java_config) }}
       java_version: ${{ fromJSON(steps.config.outputs.java_config).java.version }}
-      maven_config: ${{ fromJSON(steps.config.outputs.maven_config).maven }}
+      maven-config: ${{ steps.config.outputs.maven-config }}
+#      maven_config: ${{ fromJSON(steps.config.outputs.maven_config).maven }}
 #      maven_version: ${{ fromJSON(steps.config.outputs.maven_config).maven.version }}
     steps:
       - name: Checkout the code
@@ -20,6 +21,8 @@ jobs:
         run: |          
           echo "title='GitHub Actions'" >> "$GITHUB_OUTPUT"
           echo "java_config=$(jq -c '.' '.github/java-config.json')" >> "$GITHUB_OUTPUT"
+#          echo "maven-config=$(jq -c '.maven-config' '.github/maven-config.json')" >> "$GITHUB_OUTPUT"
+          echo "maven-config='{}'" >> "$GITHUB_OUTPUT"
       - name: Print title
         run: echo ${{ steps.config.outputs.title }}
       - name: Print java config
@@ -36,3 +39,5 @@ jobs:
         run: echo ${{ needs.config.outputs.java_config }}
       - name: Print java version
         run: echo ${{ needs.config.outputs.java_version }}
+      - name: Print maven config
+        run: echo ${{ needs.config.outputs.maven-config }}
