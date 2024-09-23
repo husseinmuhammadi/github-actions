@@ -1,3 +1,5 @@
 {
-  "maven-config": {}
+  "maven-config": {
+    "version": "3.8.3"
+  }
 }

@@ -37,4 +37,4 @@ jobs:
       - name: Print java version
         run: echo ${{ needs.config.outputs.java_version }}
       - name: Print maven config
-        run: echo ${{ needs.config.outputs.maven-config }}
+        run: echo ${{ fromJSON(needs.config.outputs.maven-config).version }}
