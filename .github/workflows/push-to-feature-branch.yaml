@@ -19,7 +19,7 @@ jobs:
         run: |          
           echo "title='GitHub Actions'" >> "$GITHUB_OUTPUT"
           echo "java_config=$(jq -c '.' '.github/java-config.json')" >> "$GITHUB_OUTPUT"
-          echo "maven-config=$(jq -c '.maven-config' '.github/app-config.json')" >> "$GITHUB_OUTPUT"
+          echo "maven-config=$(jq -c '.maven-config' '.github/build-config.json')" >> "$GITHUB_OUTPUT"
       - name: Print title
         run: echo ${{ steps.config.outputs.title }}
       - name: Print java config
