@@ -18,6 +18,8 @@ jobs:
       - name: prepare
         run: |
           jq -c '.' '.github/build-config.json'
+          jq -c '.maven-config' '.github/build-config.json'
+          jq -c '.' '.github/build-config.json'
       - id: config
         run: |          
           echo "title='GitHub Actions'" >> "$GITHUB_OUTPUT"
