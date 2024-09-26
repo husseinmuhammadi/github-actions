@@ -36,6 +36,8 @@ jobs:
         run: echo ${{ steps.config.outputs.java_config }}
       - name: Print maven config (maven config is not ready)
         run: echo ${{ steps.config.outputs.maven_config }}
+      - name: Print github config  
+        run: echo ${{ steps.config.outputs.github_config }}
   evaluate:
     name: Evaluate configuration
     runs-on: ubuntu-latest
