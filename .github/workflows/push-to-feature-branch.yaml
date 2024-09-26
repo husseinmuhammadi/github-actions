@@ -30,7 +30,7 @@ jobs:
           echo "git_config=$(jq -c '.git_config' '.github/build-config.json')" >> "$GITHUB_OUTPUT"
           echo "github_config=$(jq -c '.' '.github/github-config.json')" >> "$GITHUB_OUTPUT"
           echo "file_not_exists_config=$(jq -c '.' '.github/file-not-exists-config.json')" >> "$GITHUB_OUTPUT"
-          echo "null_value=''" >> "$GITHUB_OUTPUT"          
+          echo "empty_string=''" >> "$GITHUB_OUTPUT"          
       - name: Print title
         run: echo ${{ steps.config.outputs.title }}
       - name: Print java config
@@ -54,9 +54,12 @@ jobs:
           echo ${{ steps.config.outputs.null_value == null }} 
           echo ${{ fromJSON(steps.config.outputs.github_config).runner }}
       - name: Check if empty string is null
-        run: echo ${{ steps.config.outputs.null_value == null }}    
-      - name: Read an attribute of a null value
-        run: echo ${{ fromJSON(steps.config.outputs.null_value).value }}
+        run: |
+          echo empty_string ${{ steps.config.outputs.empty_string }}
+          echo isNull(empty_string) ${{ steps.config.outputs.empty_string == null }}    
+          echo ${{ toJSON(steps.config.outputs.empty_string) }}
+      - name: Read an attribute of an empty string
+        run: echo empty_string.value ${{ fromJSON(steps.config.outputs.empty_string).value }}
 
   
   evaluate:
