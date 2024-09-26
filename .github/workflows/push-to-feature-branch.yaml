@@ -72,7 +72,20 @@ jobs:
       - name: read null value attributes
         if: steps.config.outputs.null_value != null
         run: echo null_value.value ${{ fromJSON(steps.config.outputs.null_value).value }}
-  
+  summerize:
+    name: Summerize configuration
+    runs-on: ubuntu-latest
+    needs:
+      - config
+    steps:
+      - name: get all outputs from prior job
+        run: |
+          echo "The outputs are ${{ toJSON(needs.config.outputs) }}"
+          echo
+          cfgjson=$(echo "${{ toJSON(needs.config.outputs) }}" )
+          echo $cfgjson | yq
+          echo
+          echo "java_config is $(echo $cfgjson | yq .java_config)"      
   evaluate:
     name: Evaluate configuration
     runs-on: ubuntu-latest
