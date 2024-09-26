@@ -65,7 +65,9 @@ jobs:
           echo value ${{ steps.config.outputs.null_value }}
           echo check nullablity ${{ steps.config.outputs.null_value == null }}    
           echo json  ${{ toJSON(steps.config.outputs.null_value) }}
-          echo null_value.value ${{ fromJSON(steps.config.outputs.null_value).value }}
+      - name: read null value attributes
+        if: steps.config.outputs.null_value != null
+        run: echo null_value.value ${{ fromJSON(steps.config.outputs.null_value).value }}
   
   evaluate:
     name: Evaluate configuration
