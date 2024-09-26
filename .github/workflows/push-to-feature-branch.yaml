@@ -93,5 +93,6 @@ jobs:
       - config
     steps:
       - name: Check if a config file exists
+        if: 0 == 1
         run: test -f .github/file-not-exists-config.json
         id: file_not_exists 
