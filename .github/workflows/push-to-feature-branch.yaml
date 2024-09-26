@@ -38,6 +38,8 @@ jobs:
         run: echo ${{ steps.config.outputs.maven_config }}
       - name: Print github config  
         run: echo ${{ steps.config.outputs.github_config }}
+      - name: Pring github runner
+        run: echo ${{ steps.config.outputs.github_config.runner }}  
   evaluate:
     name: Evaluate configuration
     runs-on: ubuntu-latest
