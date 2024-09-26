@@ -58,6 +58,7 @@ jobs:
           echo ${{ steps.config.outputs.null_value == null }} 
           echo ${{ fromJSON(steps.config.outputs.github_config).runner }}
       - name: Working with empty string
+        if: steps.config.outputs.empty_string
         run: |
           echo value: ${{ steps.config.outputs.empty_string }}
           echo isNull: ${{ steps.config.outputs.empty_string == null }}    
