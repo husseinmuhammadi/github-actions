@@ -64,8 +64,7 @@ jobs:
           echo isNull: ${{ steps.config.outputs.empty_string == null }}    
           echo json: ${{ toJSON(steps.config.outputs.empty_string) }}      
           echo empty_string.value: ${{ fromJSON(steps.config.outputs.empty_string).value }}
-      - name: Working with null value
-        if: steps.config.outputs.null_value 
+      - name: Working with null value      
         run: |
           echo value ${{ steps.config.outputs.null_value && steps.config.outputs.null_value || 'null' }}
           echo check nullablity ${{ steps.config.outputs.null_value == null }}    
