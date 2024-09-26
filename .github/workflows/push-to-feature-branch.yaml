@@ -105,6 +105,7 @@ jobs:
       - name: Print git config
         run: |
           echo ${{ needs.config.outputs.git_config == null }}
+          echo ${{ toJSON(needs.config.outputs.git_config) }}
           echo ${{ needs.config.outputs.git_config }}
       - name: Print git version
         run: echo ${{ fromJSON(needs.config.outputs.git_config).version }}
