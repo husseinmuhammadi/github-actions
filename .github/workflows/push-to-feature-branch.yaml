@@ -45,7 +45,11 @@ jobs:
       - name: Print file_not_exists value
         run: echo ${{ steps.config.outputs.file_not_exists_config.value }}
       - name: Check if a value is null
-        run: echo ${{ steps.config.outputs.file_not_exists_config.value == null }}  
+        run: |
+          echo ${{ steps.config.outputs.github_config == null }}
+          echo ${{ steps.config.outputs.github_config.runner == null }}
+          echo ${{ steps.config.outputs.file_not_exists_config == null }}  
+          echo ${{ steps.config.outputs.file_not_exists_config.value == null }}  
   evaluate:
     name: Evaluate configuration
     runs-on: ubuntu-latest
