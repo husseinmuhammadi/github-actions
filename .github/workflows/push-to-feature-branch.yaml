@@ -40,6 +40,10 @@ jobs:
         run: echo ${{ steps.config.outputs.github_config }}
       - name: Pring github runner
         run: echo ${{ steps.config.outputs.github_config.runner }}  
+      - name: Print file_not_exists config
+        run: echo ${{ steps.config.outputs.file_not_exists_config }}
+      - name: Print file_not_exists value
+        run: echo ${{ steps.config.outputs.file_not_exists_config.value }}
   evaluate:
     name: Evaluate configuration
     runs-on: ubuntu-latest
