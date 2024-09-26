@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       java_config: ${{ steps.config.outputs.java_config }}
-      java_version: ${{ fromJSON(steps.config.outputs.java_config).java.version }}
+      java_version: ${{ fromJSON(steps.config.outputs.java_config).java.version }} # try to print without fromJSON
       maven_config: ${{ steps.config.outputs.maven_config }}
       git_config: ${{ steps.config.outputs.git_config }}
       github_config: ${{ steps.config.outputs.github_config }}
@@ -30,6 +30,7 @@ jobs:
           echo "git_config=$(jq -c '.git_config' '.github/build-config.json')" >> "$GITHUB_OUTPUT"
           echo "github_config=$(jq -c '.' '.github/github-config.json')" >> "$GITHUB_OUTPUT"
           echo "file_not_exists_config=$(jq -c '.' '.github/file-not-exists-config.json')" >> "$GITHUB_OUTPUT"
+          echo "null_value=''" >> "$GITHUB_OUTPUT"          
       - name: Print title
         run: echo ${{ steps.config.outputs.title }}
       - name: Print java config
@@ -50,8 +51,8 @@ jobs:
           echo ${{ steps.config.outputs.github_config.runner == null }}
           echo ${{ steps.config.outputs.file_not_exists_config == null }}  
           echo ${{ steps.config.outputs.file_not_exists_config.value == null }}  
+          echo ${{ steps.config.outputs.null_value == null }} 
           echo ${{ fromJSON(steps.config.outputs.github_config).runner }}
-          echo ${{ fromJSON(steps.config.outputs.file_not_exists_config).value }}  
   evaluate:
     name: Evaluate configuration
     runs-on: ubuntu-latest
