@@ -53,6 +53,10 @@ jobs:
           echo ${{ steps.config.outputs.file_not_exists_config.value == null }}  
           echo ${{ steps.config.outputs.null_value == null }} 
           echo ${{ fromJSON(steps.config.outputs.github_config).runner }}
+      - name: Read an attribute of a null value
+        run: echo ${{ fromJSON(steps.config.outputs.null_value).value }}
+
+  
   evaluate:
     name: Evaluate configuration
     runs-on: ubuntu-latest
