@@ -86,6 +86,7 @@ jobs:
       - name: Print file_not_exists config
         run: echo ${{ needs.config.outputs.file_not_exists_config }}
       - name: Print file_not_exists value
+        if: 0 == 1
         run: echo ${{ fromJSON(needs.config.outputs.file_not_exists_config).value }}
   evaluate-config-files:
     runs-on: ubuntu-latest
