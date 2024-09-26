@@ -67,7 +67,7 @@ jobs:
       - name: Working with null value
         if: steps.config.outputs.null_value 
         run: |
-          echo value ${{ steps.config.outputs.null_value }}
+          echo value ${{ steps.config.outputs.null_value && steps.config.outputs.null_value || 'null' }}
           echo check nullablity ${{ steps.config.outputs.null_value == null }}    
           echo json  ${{ toJSON(steps.config.outputs.null_value) }}
       - name: read null value attributes
