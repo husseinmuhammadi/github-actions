@@ -2,7 +2,7 @@ name: Project Configuration
 on:
   push:
     branches:
-      - 'feature/*'
+      - 'main'
 jobs:
   config:
     name: Prepare configuration
