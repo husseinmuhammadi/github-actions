@@ -12,7 +12,7 @@ jobs:
       java-version: ${{ fromJson(steps.extract-config.outputs.config).java.version }}
       java-architecture: ${{ fromJson(steps.extract-config.outputs.config).java.architecture }}
       java-directory: ${{ fromJson(steps.extract-config.outputs.config).java.directory }}
-      java-package: ${{ steps.extract-config.outputs.config.java.package }}
+      java-package: ${{ fromJson(steps.extract-config.outputs.config).java.package }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
