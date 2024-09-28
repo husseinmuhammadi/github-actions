@@ -24,18 +24,20 @@ jobs:
     name: Prepare configuration when attribute not provided
     runs-on: ubuntu-latest
     outputs:
-      react-version: ${{ fromJson(steps.extract-config.outputs.config).react.version }}
+      react-version: ${{ fromJson(steps.extract-config.outputs.react_config).react.version }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Extract project configuration
         id: extract-config
         run: |
-          echo "config=$(jq -c '.react' '.github/app-config.json')" >> "$GITHUB_OUTPUT"
+          echo "react_config=$(jq -c '.react' '.github/app-config.json')" >> "$GITHUB_OUTPUT"
       - name: Check nullability
         run: |
-          echo react config nullablity ${{ steps.extract-config.outputs.config == null }}
-          if [ -z "${{ steps.extract-config.outputs.config }}" ]; then
+          echo react config nullablity ${{ steps.extract-config.outputs.react_config == null }}
+          echo react config value "${{ steps.extract-config.outputs.react_config }}"         
+          echo react config json "${{ toJson(steps.extract-config.outputs.react_config) }}"         
+          if [ -z "${{ steps.extract-config.outputs.react_config }}" ]; then
             echo "Configuration not provided"
             exit 1
           fi      
