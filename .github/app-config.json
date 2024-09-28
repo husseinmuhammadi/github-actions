@@ -1,8 +1,34 @@
 {
     "java": {
-        "version": 17
+        "version": 17,
+        "distributions": "adopt",
+        "package": "jdk",
+        "architecture": "x64",
+        "heap_size": "1G",
+        "options": [
+            "-XX:+UseContainerSupport",
+            "-XX:MaxRAMPercentage=75"
+        ]        
     },
     "maven_config": {
-        "version": "3.8.3"
+        "version": "3.8.3",
+        "jdk": "17",
+        "distribution": "apache",
+        "package": "maven",
+        "options": [
+            "-Dmaven.repo.local=$GITHUB_WORKSPACE/.m2/repository"
+        ]
+    },
+    "node": {
+        "version": "16.11.1",
+        "npm": "7.24.0"
+    },
+    "gradle": {
+        "version": "7.2",
+        "distribution": "gradle",
+        "package": "gradle",
+        "options": [
+            "--no-daemon"
+        ]
     }
 }

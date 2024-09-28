@@ -10,6 +10,7 @@ jobs:
     outputs:
       config: ${{ steps.extract-config.outputs.config }}
       java-version: ${{ fromJson(steps.extract-config.outputs.config).java.version }}
+      java-directory: ${{ fromJson(steps.extract-config.outputs.config).java.directory }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -17,6 +18,18 @@ jobs:
         id: extract-config
         run: |
           echo "config=$(jq -c '.' '.github/app-config.json')" >> "$GITHUB_OUTPUT"
+  config-attribute-not-provided:
+    name: Prepare configuration
+    runs-on: ubuntu-latest
+    outputs:
+      java-version: ${{ fromJson(steps.extract-config.outputs.cfg).java.version }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Extract project configuration
+        id: extract-config
+        run: |
+          echo "cfg=$(jq -c '.' '.github/appcfg-empty.json')" >> "$GITHUB_OUTPUT"
 
   evaluate:
     name: Evaluate configuration
@@ -26,19 +39,8 @@ jobs:
       - name: Print configuration
         run: |
           echo ${{ needs.config.outputs.java-version }}
+          echo ${{ needs.config.outputs.java-directory }}
 
-#   config-attribute-not-provided:
-#     name: Prepare configuration
-#     runs-on: ubuntu-latest
-#     outputs:
-#       java-version: ${{ fromJson(steps.extract-config.outputs.cfg).java.version }}
-#     steps:
-#       - name: Checkout
-#         uses: actions/checkout@v3
-#       - name: Extract project configuration
-#         id: extract-config
-#         run: |
-#           echo "cfg=$(jq -c '.' '.github/appcfg-empty.json')" >> "$GITHUB_OUTPUT"
 #     config-file-not-provided:
 #         name: Prepare configuration
 #         runs-on: ubuntu-latest
