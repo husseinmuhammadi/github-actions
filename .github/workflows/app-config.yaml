@@ -21,7 +21,7 @@ jobs:
         run: |
           echo "config=$(jq -c '.' '.github/app-config.json')" >> "$GITHUB_OUTPUT"
   config-attribute-not-provided:
-    name: Prepare configuration
+    name: Prepare configuration when attribute not provided
     runs-on: ubuntu-latest
     outputs:
       react-version: ${{ fromJson(steps.extract-config.outputs.config).react.version }}
