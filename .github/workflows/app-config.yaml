@@ -32,11 +32,12 @@ jobs:
         id: extract-config
         run: |
           echo "config=$(jq -c '.react' '.github/app-config.json')" >> "$GITHUB_OUTPUT"
-
   evaluate:
     name: Evaluate configuration
     runs-on: ubuntu-latest
-    needs: config
+    needs: 
+      - config
+      - config-attribute-not-provided
     steps:
       - name: Print configuration
         run: |
@@ -44,6 +45,9 @@ jobs:
           echo ${{ needs.config.outputs.java-architecture }}
           echo ${{ needs.config.outputs.java-directory }}
           echo ${{ needs.config.outputs.java-package }}
+      - name: Print configuration when attribute not provided
+        run: |
+          echo ${{ needs.config-attribute-not-provided.outputs.react-version }}
 #     config-file-not-provided:
 #         name: Prepare configuration
 #         runs-on: ubuntu-latest
