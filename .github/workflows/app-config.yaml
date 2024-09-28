@@ -10,7 +10,9 @@ jobs:
     outputs:
       config: ${{ steps.extract-config.outputs.config }}
       java-version: ${{ fromJson(steps.extract-config.outputs.config).java.version }}
+      java-architecture: ${{ fromJson(steps.extract-config.outputs.config).java.architecture }}
       java-directory: ${{ fromJson(steps.extract-config.outputs.config).java.directory }}
+      java-package: ${{ fromJson(steps.extract-config.outputs.config).java.package }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -22,14 +24,14 @@ jobs:
     name: Prepare configuration
     runs-on: ubuntu-latest
     outputs:
-      java-version: ${{ fromJson(steps.extract-config.outputs.cfg).java.version }}
+      react-version: ${{ fromJson(steps.extract-config.outputs.config).react.version }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Extract project configuration
         id: extract-config
         run: |
-          echo "cfg=$(jq -c '.' '.github/appcfg-empty.json')" >> "$GITHUB_OUTPUT"
+          echo "config=$(jq -c '.react' '.github/app-config.json')" >> "$GITHUB_OUTPUT"
 
   evaluate:
     name: Evaluate configuration
@@ -39,8 +41,9 @@ jobs:
       - name: Print configuration
         run: |
           echo ${{ needs.config.outputs.java-version }}
+          echo ${{ needs.config.outputs.java-architecture }}
           echo ${{ needs.config.outputs.java-directory }}
-
+          echo ${{ needs.config.outputs.java-package }}
 #     config-file-not-provided:
 #         name: Prepare configuration
 #         runs-on: ubuntu-latest

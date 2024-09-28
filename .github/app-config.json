@@ -30,5 +30,9 @@
         "options": [
             "--no-daemon"
         ]
+    },
+    "docker": {
+        "version": "20.10.8",
+        "compose": "1.29.2"        
     }
 }
