@@ -35,6 +35,7 @@ jobs:
       - name: Check nullability
         run: |
           echo react config nullablity ${{ steps.extract-config.outputs.react_config == null }}
+          echo react config nullablity ${{ steps.extract-config.outputs.react_config == 'null' }}
           echo react config value ${{ steps.extract-config.outputs.react_config }}
           echo react config value "${{ steps.extract-config.outputs.react_config }}"         
           echo react config json "${{ toJson(steps.extract-config.outputs.react_config) }}"         
