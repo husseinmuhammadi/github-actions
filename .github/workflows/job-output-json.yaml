@@ -38,7 +38,7 @@ jobs:
         shell: bash
         id: populate-json
         env:
-          JSON: '{"name": "John", "age": 30, "city": "New York"}'
+          JSON: '{"name": "John", "age": 30, "city": "New York", "address": {"street": "123 Main St", "zip": 10001}}'
         run: |
             echo "PERSON=$JSON" >> $GITHUB_ENV
             echo "person=${{ toJson(env.JSON) }}" >> $GITHUB_OUTPUT
