@@ -54,3 +54,6 @@ jobs:
       - name: Print person
         run: |
           echo "Person=${{ needs.populate-json.outputs.person }}"
+          echo "name=${{ fromJson(needs.populate-json.outputs.person).name }}"
+          echo "age=${{ fromJson(needs.populate-json.outputs.person).age }}"
+          echo "city=${{ fromJson(needs.populate-json.outputs.person).city }}"
