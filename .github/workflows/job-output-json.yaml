@@ -38,7 +38,10 @@ jobs:
           JSON: '{"name": "John", "age": 30, "city": "New York"}'
         run: |
             echo "PERSON=$JSON" >> $GITHUB_ENV
+            echo "person=${{ toJson(env.JSON) }}" >> $GITHUB_OUTPUT
+            echo "PERSON=$JSON"
       - name: Display JSON object
+        shell: bash
         run: |
           echo "Person=${{ env.PERSON }}"
           
