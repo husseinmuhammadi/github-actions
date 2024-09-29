@@ -35,6 +35,7 @@ jobs:
       - name: Check nullability
         run: |
           echo react config nullablity ${{ steps.extract-config.outputs.react_config == null }}
+          echo react config nullablity ${{ steps.extract-config.outputs.react_config == '' }}
           echo react config nullablity ${{ steps.extract-config.outputs.react_config == 'null' }}
           echo react config value ${{ steps.extract-config.outputs.react_config }}
           echo react config value "${{ steps.extract-config.outputs.react_config }}"         
@@ -54,7 +55,13 @@ jobs:
       - name: Extract project configuration
         id: extract-config
         run: |
-            echo "config=$(jq -c '.' '.github/empty.json')" >> "$GITHUB_OUTPUT"         
+            echo "config=$(jq -c '.' '.github/empty.json')" >> "$GITHUB_OUTPUT"        
+      - name: Check nullability
+        run: |
+          if [ -z "${{ steps.extract-config.outputs.config }}" ]; then
+            echo "Configuration not provided"
+            exit 1
+          fi
   evaluate:
     name: Evaluate configuration
     runs-on: ubuntu-latest
