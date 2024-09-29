@@ -17,11 +17,11 @@ jobs:
           failures=2
 
           # set them as GitHub ENV variables
-          echo "Tests=$tests" >> $GITHUB_ENV
-          echo "Failures=$failures" >> $GITHUB_ENV
+          echo "TESTS=$tests" >> $GITHUB_ENV
+          echo "FAILURES=$failures" >> $GITHUB_ENV
 
           # retrieve these GitHub ENV variables
-          echo "${{ env.Failures }} out of ${{ env.Tests }} tests failed on CI"  
+          echo "${{ env.FAILURES }} out of ${{ env.TESTS }} tests failed on CI"  
       - name: Print all Environment Variables
         run: |
           env    
