@@ -28,6 +28,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Preparation
+        run: jq -c '.react' '.github/empty.json'
       - name: Extract project configuration
         id: extract-config
         run: |
