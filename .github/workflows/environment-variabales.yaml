@@ -33,6 +33,8 @@ jobs:
           env    
       - name: Display Environment Variables
         run: |
+          echo "Tests=${{ env.TESTS }}"
+          echo "Failures=${{ env.FAILURES }}"  
           echo "Tests=$TESTS"
           echo "Failures=$FAILURES"  
           
