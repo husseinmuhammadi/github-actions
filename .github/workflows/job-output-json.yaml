@@ -45,6 +45,8 @@ jobs:
             echo "person=${{ toJson(env.JSON) }}" >> $GITHUB_OUTPUT
             echo "PERSON=$JSON"
             echo "address=${{ fromJson(env.JSON).address }}"
+            echo "address=${{ toJson(fromJson(env.JSON).address) }}"
+            echo "street=${{ fromJson(env.JSON).address.street }}"
       - name: Display JSON object
         shell: bash
         run: |
