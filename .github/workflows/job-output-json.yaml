@@ -1,0 +1,51 @@
+name: JSON Object as a Job Output
+on:
+  workflow_dispatch:  
+  push:
+    branches:
+      - 'main'  
+jobs:
+  json-object:  
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Populate JSON object
+        shell: bash
+        env:
+          JSON: '{"name": "John", "age": 30, "city": "New York"}'
+        run: |
+          echo "JSON=$JSON" >> $GITHUB_ENV
+          echo "JSON=$JSON"
+          echo "JSON=${{ env.JSON }}"
+          echo "JSON=${{ toJson(env.JSON) }}"
+          echo "JSON=${{ fromJson(env.JSON).name }}"
+          echo "JSON=${{ fromJson(env.JSON).age }}"
+          echo "JSON=${{ fromJson(env.JSON).city }}"
+          echo "JSON=${{ fromJson(env.JSON) }}"
+          echo "JSON=${{ toJson(fromJson(env.JSON)) }}"
+          echo "JSON=${{ toJson(fromJson(env.JSON).name) }}"
+          echo "JSON=${{ toJson(fromJson(env.JSON).age) }}"
+          echo "JSON=${{ toJson(fromJson(env.JSON).city) }}"
+          echo "JSON=${{ toJson(fromJson(env.JSON)) }}"
+          echo "JSON=${{ toJson(fromJson(env.JSON).name) }}"
+          echo "JSON=${{ toJson(fromJson(env.JSON).age) }}"
+          echo "JSON=${{ toJson(fromJson(env.JSON).city) }}"
+          echo "JSON=${{ toJson(fromJson(env.JSON)) }}"
+          echo "JSON=${{ toJson(fromJson(env.JSON).name) }}"
+          echo "JSON=${{ toJson(fromJson(env.JSON).age) }}"
+          echo "JSON=${{ toJson(fromJson(env.JSON).city) }}"
+          echo "JSON=${{ toJson(fromJson(env.JSON)) }}"
+          echo "JSON=${{ toJson(fromJson(env.JSON).name) }}"
+          echo "JSON=${{ toJson(fromJson(env.JSON).age) }}"
+          echo "JSON=${{ toJson(fromJson(env.JSON).city) }}"
+          echo "JSON=${{ toJson(fromJson(env.JSON)) }}"
+          echo "JSON=${{ toJson(fromJson(env.JSON).name) }}"
+          echo "JSON=${{ toJson(fromJson(env.JSON).age) }}"
+          echo "JSON=${{ toJson(fromJson(env.JSON).city) }}"
+          echo "JSON=${{ toJson(fromJson(env.JSON)) }}"
+          echo "JSON=${{ toJson(fromJson(env.JSON).name) }}"
+          echo "JSON=${{ toJson(fromJson(env.JSON).age) }}"
+          echo "JSON=${{ toJson(fromJson(env.JSON).city) }}"
+          echo "JSON=${{ toJson(fromJson(env.JSON)) }}"
+ 
