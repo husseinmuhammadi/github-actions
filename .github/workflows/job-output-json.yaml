@@ -47,5 +47,10 @@ jobs:
         shell: bash
         run: |
           echo "Person=${{ env.PERSON }}"
-          
-          
+  json-processor:
+    runs-on: ubuntu-latest
+    needs: [populate-json]
+    steps:
+      - name: Print person
+        run: |
+          echo "Person=${{ needs.populate-json.outputs.person }}"
