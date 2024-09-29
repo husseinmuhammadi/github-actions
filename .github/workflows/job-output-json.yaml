@@ -5,7 +5,7 @@ on:
     branches:
       - 'feature/*'  
 jobs:
-  json-object:  
+  jsob-expression-in-github:  
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -27,5 +27,19 @@ jobs:
           echo "name=${{ toJson(fromJson(env.JSON).name) }}"
           echo "age=${{ toJson(fromJson(env.JSON).age) }}"
           echo "city=${{ toJson(fromJson(env.JSON).city) }}"
+  populate-json:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Populate JSON object
+        shell: bash
+        env:
+          JSON: '{"name": "John", "age": 30, "city": "New York"}'
+        run: |
+            echo "PERSON=$JSON" >> $GITHUB_ENV
+      - name: Display JSON object
+        run: |
+          echo "Person=${{ env.PERSON }}"
           
- 
+          
