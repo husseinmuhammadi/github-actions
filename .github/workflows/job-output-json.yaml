@@ -61,3 +61,4 @@ jobs:
           echo "name=${{ fromJson(needs.populate-json.outputs.person).name }}"
           echo "age=${{ fromJson(needs.populate-json.outputs.person).age }}"
           echo "city=${{ fromJson(needs.populate-json.outputs.person).city }}"
+          echo "address=${{ needs.populate-json.outputs.address }}"
