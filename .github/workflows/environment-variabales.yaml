@@ -2,7 +2,7 @@ name: Environment Variables
 on:
   push:
     branches:
-      - 'feature/*'
+      - 'main'
 jobs:
   generate-env-variables:
     name: Generate Environment Variables
