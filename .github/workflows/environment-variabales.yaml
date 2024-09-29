@@ -12,6 +12,7 @@ jobs:
     steps:
       - name: Print number
         run: |
+          echo "Number=${{ env.NUMBER }}"  
           echo "Number=$NUMBER"  
       - name: Set and Retrieve Github ENV variables
         shell: bash
