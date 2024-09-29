@@ -29,11 +29,14 @@ jobs:
           echo "city=${{ toJson(fromJson(env.JSON).city) }}"
   populate-json:
     runs-on: ubuntu-latest
+    outputs:
+      person: ${{ steps.populate-json.outputs.person }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Populate JSON object
         shell: bash
+        id: populate-json
         env:
           JSON: '{"name": "John", "age": 30, "city": "New York"}'
         run: |
