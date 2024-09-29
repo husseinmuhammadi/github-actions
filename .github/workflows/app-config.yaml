@@ -65,6 +65,7 @@ jobs:
             exit 1
           fi
       - name: Continue with default configuration
+        if: ${{ !cancelled() }} 
         run: |
           echo "Continue with default configuration"
   evaluate:
