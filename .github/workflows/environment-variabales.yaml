@@ -7,7 +7,12 @@ jobs:
   generate-env-variables:
     name: Generate Environment Variables
     runs-on: ubuntu-latest
+    env:
+      NUMBER: 42      
     steps:
+      - name: Print number
+        run: |
+          echo "Number=$NUMBER"  
       - name: Set and Retrieve Github ENV variables
         shell: bash
         run: |
